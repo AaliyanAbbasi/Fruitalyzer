@@ -1,0 +1,125 @@
+.farm-selection-container {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+}
+
+.farm-selection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.farm-selection-header .back-btn,
+.farm-selection-header .profile-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.farm-selection-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0c5c4c;
+    margin: 0;
+}
+
+/* Search Bar */
+.search-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b0bac9;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background: #f4f6f8;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar::placeholder {
+    color: #b0bac9;
+}
+
+/* Farm Cards */
+.farms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.farm-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.farm-thumb {
+    width: 80px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.farm-info {
+    flex: 1;
+}
+
+.farm-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #0c5c4c;
+    font-weight: 700;
+}
+
+.farm-type {
+    font-size: 13px;
+    color: #64748b;
+    margin: 2px 0;
+}
+
+.farm-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.forward-btn {
+    color: #94a3b8;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.farm-card:hover .forward-btn {
+    color: #0c5c4c;
+}

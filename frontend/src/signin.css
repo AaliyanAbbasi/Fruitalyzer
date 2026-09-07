@@ -1,0 +1,160 @@
+.signin-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6f9f8;
+    padding: clamp(1rem, 5vw, 2.5rem);
+    width: 100%;
+    overflow-y: auto;
+}
+
+.signin-card {
+    width: 100%;
+    max-width: 440px;
+    min-width: 280px;
+    background: #ffffff;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .signin-card {
+        padding: 30px 20px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+    }
+
+    .input-wrapper input {
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .signin-btn {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 350px) {
+    .signin-card {
+        padding: 20px 15px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+}
+
+
+.title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.subtitle .green {
+    color: #1dbf73;
+}
+
+.subtitle .yellow {
+    color: #f6c445;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #4a4a4a;
+    font-weight: 500;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #f4f6f8;
+    border-radius: 8px;
+    padding: 0 12px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.input-wrapper:focus-within {
+    border-color: #1dbf73;
+}
+
+.input-icon {
+    color: #b0bac9;
+    margin-right: 10px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 14px 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+}
+
+.input-wrapper input::placeholder {
+    color: #b0bac9;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #b0bac9;
+    display: flex;
+    align-items: center;
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 16px;
+    background: #0a5c4a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+
+.signin-btn:hover {
+    background: #084c3d;
+}

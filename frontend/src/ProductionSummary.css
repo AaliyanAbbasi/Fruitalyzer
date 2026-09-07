@@ -1,0 +1,126 @@
+.production-summary-container {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.production-summary-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.production-summary-header .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a4a4a;
+    padding: 0;
+}
+
+.production-summary-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0c5c4c;
+    margin: 0;
+}
+
+/* Search Bar */
+.search-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b0bac9;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background: #f4f6f8;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Batch Detail Card */
+.batch-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.batch-card-header {
+    background: #064E3B;
+    /* Darker teal/green */
+    padding: 18px;
+    text-align: center;
+}
+
+.batch-card-header h2 {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.batch-card-body {
+    background: #527A6D;
+    /* Lighter green as per image */
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    /* Makes it scrollable */
+    max-height: 500px;
+    /* Limit height to enable scroll if needed */
+}
+
+/* Custom scrollbar for premium look */
+.batch-card-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.batch-card-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.batch-card-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
+    color: white;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.detail-value {
+    font-size: 17px;
+    font-weight: 700;
+}

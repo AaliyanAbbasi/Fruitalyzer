@@ -1,0 +1,334 @@
+#
+#project:
+#  name: "Fruitalyzer Quality Prediction"
+#  mode: "quality_only"
+#
+#dataset:
+#  path: "FruitGrade_Dataset"
+#
+#  # These names become the final model labels:
+#  # apple_A ... mango_C
+#  fruits: ["apple", "banana", "mango"]
+#  grades: ["A", "B", "C"]
+#
+#  # The dataset is not renamed or moved. This mapping only tells the loader
+#  # where each logical class already exists on disk.
+#  folder_mapping:
+#    apple:
+#      folder: "apple"
+#      grades:
+#        A: "A"
+#        B: "B"
+#        C: "C"
+#    banana:
+#      folder: "banana"
+#      grades:
+#        A: "A"
+#        B: "B"
+#        C: "C"
+#    mango:
+#      folder: "Mango"
+#      grades:
+#        A: "Class A"
+#        B: "Class B"
+#        C: "Class C"
+#
+#  image_extensions: [".jpg", ".jpeg", ".png", ".webp"]
+#  min_file_size_bytes: 1024
+#
+#  # 70% training, 15% validation and 15% final testing.
+#  val_split: 0.15
+#  test_split: 0.15
+#  seed: 42
+#
+#preprocessing:
+#  image_size: 224
+#  mean: [0.485, 0.456, 0.406]
+#  std: [0.229, 0.224, 0.225]
+#
+#augmentation:
+#  # Mild augmentation keeps fruit colour, spots and bruises meaningful.
+#  random_resized_crop:
+#    enabled: true
+#    scale_min: 0.85
+#    scale_max: 1.0
+#  horizontal_flip: true
+#  rotation_deg: 10
+#  translate: 0.05
+#  color_jitter:
+#    brightness: 0.15
+#    contrast: 0.15
+#    saturation: 0.05
+#    hue: 0.0
+#  gaussian_blur:
+#    enabled: true
+#    probability: 0.10
+#    kernel_size: 3
+#    sigma_min: 0.1
+#    sigma_max: 0.6
+#  random_perspective:
+#    enabled: false
+#    distortion_scale: 0.05
+#    probability: 0.10
+#
+#model:
+#  name: "efficientnet_b0"
+#  pretrained: true
+#  dropout_rate: 0.3
+#
+#  # Stage 2 keeps the early general image features frozen and fine-tunes
+#  # only the later EfficientNet blocks for fruit grading.
+#  freeze_blocks: 5
+#  freeze_batch_norm: true
+#
+#training:
+#  batch_size: 32
+#  weight_decay: 0.0001
+#  label_smoothing: 0.1
+#  num_workers: 0
+#  device: "cpu"
+#
+#  # Stage 1 learns the new nine-class classifier head.
+#  stage1:
+#    epochs: 5
+#    learning_rate: 0.001
+#    patience: 3
+#
+#  # Stage 2 fine-tunes the later EfficientNet layers at a low learning rate.
+#  stage2:
+#    epochs: 20
+#    learning_rate: 0.00003
+#    patience: 5
+#
+#  scheduler:
+#    factor: 0.5
+#    patience: 2
+#
+#inference:
+#  device: "cpu"
+#  confidence_threshold: 0.40
+#  ambiguity_margin: 0.05
+#  top_k: 3
+#
+#  # Disabled so deployment preprocessing matches validation/test preprocessing.
+#  gamma_correction:
+#    enabled: false
+#    brightness_threshold: 110
+#    gamma: 1.35
+#
+#paths:
+#  save_dir: "ml/models/saved"
+#  model_path: "ml/models/saved/quality_model.pth"
+#  class_mapping_path: "ml/models/saved/class_mapping.json"
+#  metrics_path: "ml/models/saved/training_metrics.csv"
+#  test_metrics_path: "ml/models/saved/test_metrics.json"
+#  classification_report_path: "ml/models/saved/classification_report.txt"
+#  confusion_matrix_path: "ml/models/saved/confusion_matrix.png"
+project:
+  name: "Fruitalyzer Quality and Category Prediction"
+  mode: "quality_and_category"
+
+dataset:
+  path: "FruitGrade_Dataset"
+
+  # Existing quality labels remain unchanged so the API can continue returning
+  # prediction, fruit and grade exactly as before.
+  quality_classes:
+    - "apple_A"
+    - "apple_B"
+    - "apple_C"
+    - "banana_A"
+    - "banana_B"
+    - "banana_C"
+    - "mango_A"
+    - "mango_B"
+    - "mango_C"
+
+  # One extra head learns the fruit category/variety.
+  category_classes:
+    - "red_apple"
+    - "green_apple"
+    - "banana"
+    - "chaunsa"
+    - "sindhri"
+    - "anwar_ratol"
+
+  # The dataset is never renamed, moved or edited. Each source only tells the
+  # loader where the images already exist and which labels they provide.
+  sources:
+    - name: "red_apple_A"
+      folder: "apple/A"
+      fruit: "apple"
+      category: "red_apple"
+      quality_label: "apple_A"
+    - name: "red_apple_B"
+      folder: "apple/B"
+      fruit: "apple"
+      category: "red_apple"
+      quality_label: "apple_B"
+    - name: "red_apple_C"
+      folder: "apple/C"
+      fruit: "apple"
+      category: "red_apple"
+      quality_label: "apple_C"
+
+    - name: "banana_A"
+      folder: "banana/A"
+      fruit: "banana"
+      category: "banana"
+      quality_label: "banana_A"
+    - name: "banana_B"
+      folder: "banana/B"
+      fruit: "banana"
+      category: "banana"
+      quality_label: "banana_B"
+    - name: "banana_C"
+      folder: "banana/C"
+      fruit: "banana"
+      category: "banana"
+      quality_label: "banana_C"
+
+    - name: "chaunsa_A"
+      folder: "Mango/Class A"
+      fruit: "mango"
+      category: "chaunsa"
+      quality_label: "mango_A"
+    - name: "chaunsa_B"
+      folder: "Mango/Class B"
+      fruit: "mango"
+      category: "chaunsa"
+      quality_label: "mango_B"
+    - name: "chaunsa_C"
+      folder: "Mango/Class C"
+      fruit: "mango"
+      category: "chaunsa"
+      quality_label: "mango_C"
+
+    # These new folders may contain direct images or A/B/C subfolders. If an
+    # A/B/C folder is present, its quality label is also used automatically.
+    - name: "green_apple"
+      folder: "green apple"
+      fruit: "apple"
+      category: "green_apple"
+      quality_label: null
+      infer_grade_from_subfolders: true
+    - name: "sindhri"
+      folder: "sindhri"
+      fruit: "mango"
+      category: "sindhri"
+      quality_label: null
+      infer_grade_from_subfolders: true
+    - name: "anwar_ratol"
+      folder: "anwar ratol"
+      fruit: "mango"
+      category: "anwar_ratol"
+      quality_label: null
+      infer_grade_from_subfolders: true
+
+  image_extensions: [".jpg", ".jpeg", ".png", ".webp"]
+  min_file_size_bytes: 1024
+  val_split: 0.15
+  test_split: 0.15
+  seed: 42
+
+preprocessing:
+  image_size: 224
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+augmentation:
+  random_resized_crop:
+    enabled: true
+    scale_min: 0.85
+    scale_max: 1.0
+  horizontal_flip: true
+  rotation_deg: 10
+  translate: 0.05
+  color_jitter:
+    brightness: 0.15
+    contrast: 0.15
+    saturation: 0.05
+    hue: 0.0
+  gaussian_blur:
+    enabled: true
+    probability: 0.10
+    kernel_size: 3
+    sigma_min: 0.1
+    sigma_max: 0.6
+
+  # No new image files are created. After the original images are split,
+  # training-only sample references are repeated and randomly augmented until
+  # these new categories have at least 150 effective training samples.
+  virtual_training_targets:
+    green_apple: 150
+    sindhri: 150
+    anwar_ratol: 150
+
+model:
+  name: "efficientnet_b0_multitask"
+  dropout_rate: 0.3
+  freeze_blocks: 5
+  freeze_batch_norm: true
+
+  # Reuse the already trained 92% quality model as the starting backbone and
+  # quality head, then add and learn one new category head.
+  initialize_from_existing_quality_model: true
+
+training:
+  batch_size: 32
+  weight_decay: 0.0001
+  label_smoothing: 0.1
+  num_workers: 0
+  device: "cpu"
+
+  # Quality has slightly more importance so the previous grading performance
+  # is preserved while category recognition is added.
+  selection_weights:
+    quality: 0.60
+    category: 0.40
+
+  stage1:
+    epochs: 6
+    learning_rate: 0.001
+    patience: 3
+    quality_loss_weight: 0.0
+    category_loss_weight: 1.0
+
+  stage2:
+    epochs: 15
+    learning_rate: 0.00002
+    patience: 5
+    quality_loss_weight: 1.0
+    category_loss_weight: 1.0
+
+  scheduler:
+    factor: 0.5
+    patience: 2
+
+inference:
+  device: "cpu"
+  confidence_threshold: 0.40
+  category_confidence_threshold: 0.35
+  top_k: 3
+
+  allowed_categories:
+    apple: ["red_apple", "green_apple"]
+    banana: ["banana"]
+    mango: ["chaunsa", "sindhri", "anwar_ratol"]
+
+  gamma_correction:
+    enabled: false
+    brightness_threshold: 110
+    gamma: 1.35
+
+paths:
+  save_dir: "ml/models/saved"
+  model_path: "ml/models/saved/quality_model.pth"
+  class_mapping_path: "ml/models/saved/class_mapping.json"
+  category_mapping_path: "ml/models/saved/category_mapping.json"
+  metrics_path: "ml/models/saved/training_metrics.csv"
+  test_metrics_path: "ml/models/saved/test_metrics.json"
+  classification_report_path: "ml/models/saved/classification_report.txt"
+  category_classification_report_path: "ml/models/saved/category_classification_report.txt"
+  confusion_matrix_path: "ml/models/saved/confusion_matrix.png"
+  category_confusion_matrix_path: "ml/models/saved/category_confusion_matrix.png"

@@ -1,0 +1,151 @@
+.farm-details-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6f9f8;
+    padding: 20px;
+}
+
+.farm-details-card {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.back-btn-absolute {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.back-btn-absolute:hover {
+    background: #f0f0f0;
+}
+
+
+.farm-details-card .title {
+    color: #0c5c4c;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: #0c5c4c;
+    font-weight: 500;
+}
+
+.input-field {
+    width: 100%;
+    padding: 16px;
+    background: #f4f6f8;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 18px;
+    color: #333;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: #1caf7e;
+}
+
+.input-field::placeholder {
+    color: #b0bac9;
+}
+
+/* Two column layout for location */
+.location-row {
+    display: flex;
+    gap: 12px;
+}
+
+.location-row .input-group {
+    flex: 1;
+}
+
+.location-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0 12px;
+}
+
+.location-wrapper .input-icon {
+    color: #4a4a4a;
+    margin-right: 8px;
+}
+
+.location-wrapper input,
+.location-wrapper select {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #4a4a4a;
+    background: transparent;
+}
+
+.location-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 24px;
+}
+
+.chevron-icon {
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+    color: #4a4a4a;
+}
+
+.add-farm-btn {
+    width: 100%;
+    max-width: 200px;
+    margin: 40px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background: #0c5c4c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-farm-btn:hover {
+    background: #094a3d;
+}

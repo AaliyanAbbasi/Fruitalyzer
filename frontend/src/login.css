@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+
+}
+
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6f9f8;
+    padding: clamp(1rem, 5vw, 2.5rem);
+    /* Fluid padding around the card */
+    width: 100%;
+    overflow-y: auto;
+    /* Allow scrolling if card is taller than screen */
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    /* Increased slightly for better desktop feel */
+    min-width: 280px;
+    background: #ffffff;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    /* Fluid internal padding */
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+
+.title {
+    margin: 0;
+    font-size: 32px;
+}
+
+.subtitle {
+    margin-bottom: 32px;
+    color: #1dbf73;
+    font-size: 18px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #1dbf73;
+}
+
+.password-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.password-box input {
+    border: none;
+    flex: 1;
+}
+
+.toggle {
+    padding: 0 12px;
+    cursor: pointer;
+}
+
+.forgot {
+    text-align: right;
+    font-size: 14px;
+    color: #4c6ef5;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: #0a5c4a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #084c3d;
+}
+
+.signup-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.signup-text span {
+    color: red;
+    cursor: pointer;
+    font-weight: 500;
+}

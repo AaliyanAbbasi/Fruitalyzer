@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.idea/
+*.zip
+raw_data/
+FruitGrade_Dataset/
+ml/models/saved/
+*.pth
+*.csv
